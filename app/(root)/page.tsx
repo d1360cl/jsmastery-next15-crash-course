@@ -4,8 +4,6 @@ import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
-import { auth } from "@/auth";
-
 export default async function Home({
   searchParams,
 }: {
