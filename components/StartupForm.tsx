@@ -29,7 +29,7 @@ const StartupForm = () => {
 
       await formSchema.parseAsync(formValues);
 
-      const result = await createPitch(prevState, formData, pitch);
+      const result = await createPitch(formData, pitch);
 
       if (result.status == "SUCCESS") {
         toast("Success", {
@@ -65,7 +65,8 @@ const StartupForm = () => {
     }
   };
 
-  const [formAction, isPending] = useActionState(handleFormSubmit, {
+  // eslint-disable-next-line
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
     error: "",
     status: "INITIAL",
   });
