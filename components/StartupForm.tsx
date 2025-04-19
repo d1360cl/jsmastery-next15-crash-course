@@ -17,7 +17,7 @@ const StartupForm = () => {
   const [pitch, setPitch] = useState("");
   const router = useRouter();
 
-  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+  const handleFormSubmit = async (prevState: object, formData: FormData) => {
     try {
       const formValues = {
         title: formData.get("title") as string,
@@ -65,7 +65,7 @@ const StartupForm = () => {
     }
   };
 
-  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+  const [formAction, isPending] = useActionState(handleFormSubmit, {
     error: "",
     status: "INITIAL",
   });
@@ -143,7 +143,7 @@ const StartupForm = () => {
 
         <MDEditor
           value={pitch}
-          onChange={(value: any) => setPitch(value as string)}
+          onChange={(value) => setPitch(value as string)}
           id="pitch"
           preview="edit"
           height={300}
