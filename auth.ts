@@ -12,25 +12,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({
-      user: { name, email, image },
-      account,
-      profile: { id, login, bio },
-    }) {
+    async signIn({ user: { name, email, image }, profile }) {
       const userExists = await client
         .withConfig({ useCdn: false })
         .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
-          id,
+          id: profile?.id,
         });
       if (!userExists) {
         await writeClient.create({
           _type: "author",
-          id: id,
+          id: profile?.id,
           name,
-          username: login,
+          username: profile?.login,
           email,
           image,
-          bio,
+          bio: profile?.bio,
         });
       }
       return true;
